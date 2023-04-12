@@ -14,10 +14,11 @@ class Timer{
     }
     start = () => {
         if(this.onStart){
-            this.onStart();
+            console.log(this.durationInput.value);
+            this.onStart(this.timeRemaining);
         }
         this.tick(); // set interval will cause user to see tick in one second so to avoid it we have added this.tick manually
-        this.interval =  setInterval(this.tick , 1000); // will return some integer (timer id)
+        this.interval =  setInterval(this.tick , 20); // will return some integer (timer id)
         
     };
     pause = ()=>{
@@ -25,10 +26,10 @@ class Timer{
 
     };
     tick = () => {
-      if(this.timeRemaining > 0)
-       {this.timeRemaining = this.timeRemaining - 1;
+      if(this.timeRemaining >  0 )
+       {this.timeRemaining = this.timeRemaining - 0.02;
         if(this.onTick){
-            this.onTick();
+            this.onTick(this.timeRemaining);
         }
     
     
@@ -46,6 +47,6 @@ class Timer{
         return parseFloat(this.durationInput.value);
     }
     set timeRemaining(time){
-        this.durationInput.value = time;
+        this.durationInput.value = time.toFixed(2);
     }
 }
